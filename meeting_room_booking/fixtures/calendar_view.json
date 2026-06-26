@@ -1,0 +1,13 @@
+[
+ {
+  "all_day": 1,
+  "docstatus": 0,
+  "doctype": "Calendar View",
+  "end_date_field": "booking_date",
+  "modified": "2026-06-25 15:50:08.304324",
+  "name": "Room Booking Calendar",
+  "reference_doctype": "Room Booking",
+  "start_date_field": "booking_date",
+  "subject_field": "meeting_title"
+ }
+]

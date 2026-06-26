@@ -1,0 +1,34 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2026-06-25 17:30:26.618260",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2026-06-25 17:30:26.618260",
+ "modified_by": "Administrator",
+ "module": "Meeting Room Booking",
+ "name": "Cancelled and Rejected Bookings",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\r\n    meeting_title AS \"Meeting Title:Data:200\",\r\n    room AS \"Room:Link/Meeting Room:150\",\r\n    requested_by AS \"Requested By:Link/Employee:150\",\r\n    booking_date AS \"Date:Date:100\",\r\n    status AS \"Status:Data:120\"\r\nFROM `tabRoom Booking`\r\nWHERE status IN ('Cancelled', 'Rejected')\r\nORDER BY booking_date DESC",
+ "ref_doctype": "Room Booking",
+ "report_name": "Cancelled and Rejected Bookings",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "Approver"
+  },
+  {
+   "role": "Admin"
+  }
+ ],
+ "timeout": 0
+}
