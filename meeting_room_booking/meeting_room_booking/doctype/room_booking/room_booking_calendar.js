@@ -11,7 +11,7 @@ frappe.views.calendar["Room Booking"] = {
         {
             fieldtype: "Select",
             fieldname: "status",
-            label: __("Status"),
+            label: "Status",
             options: "\nApproved",
             default: "Approved"
         }
