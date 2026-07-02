@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "RB-.####",
  "creation": "2026-06-25 15:11:19.413386",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -74,10 +75,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-26 19:07:54.078617",
+ "modified": "2026-07-01 14:10:17.198704",
  "modified_by": "Administrator",
  "module": "Meeting Room Booking",
  "name": "Room Booking",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

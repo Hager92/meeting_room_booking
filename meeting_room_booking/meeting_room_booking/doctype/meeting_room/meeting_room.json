@@ -2,6 +2,7 @@
  "actions": [],
  "allow_bulk_edit": 1,
  "allow_rename": 1,
+ "autoname": "field:room_name",
  "creation": "2026-06-25 15:06:14.080943",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -18,7 +19,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Room Name",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "capacity",
@@ -49,10 +51,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-25 17:12:24.283477",
+ "modified": "2026-06-29 20:03:02.859905",
  "modified_by": "Administrator",
  "module": "Meeting Room Booking",
  "name": "Meeting Room",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
