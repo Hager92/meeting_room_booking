@@ -55,62 +55,56 @@ def create_room_booking(
     purpose: Optional[str] = None
 ):
 
-    try:
-        # Validate booking time
-        if start_time >= end_time:
-            frappe.throw(_("Start Time must be before End Time"))
+    # Validate booking time
+    if start_time >= end_time:
+        frappe.throw(_("Start Time must be before End Time"))
 
-        if not frappe.db.exists("Meeting Room", room):
-            frappe.throw(_("Meeting Room does not exist"))
+    if not frappe.db.exists("Meeting Room", room):
+        frappe.throw(_("Meeting Room does not exist"))
 
-        room_doc = frappe.get_doc("Meeting Room", room)
+    room_doc = frappe.get_doc("Meeting Room", room)
 
-        if room_doc.status != "Available":
-            frappe.throw(_("Room is not available"))
+    if room_doc.status != "Available":
+        frappe.throw(_("Room is not available"))
 
-        # Prevent double booking
-        conflict = frappe.db.sql(
-            """
-            SELECT name
-            FROM `tabRoom Booking`
-            WHERE room = %s
-            AND booking_date = %s
-            AND status IN ('Pending Approval', 'Approved', 'Completed')
-            AND start_time < %s
-            AND end_time > %s
-            LIMIT 1
-            """,
-            (room, booking_date, end_time, start_time),
-            as_dict=True
-        )
+    # Prevent double booking
+    conflict = frappe.db.sql(
+        """
+        SELECT name
+        FROM `tabRoom Booking`
+        WHERE room = %s
+        AND booking_date = %s
+        AND status IN ('Pending Approval', 'Approved', 'Completed')
+        AND start_time < %s
+        AND end_time > %s
+        LIMIT 1
+        """,
+        (room, booking_date, end_time, start_time),
+        as_dict=True
+    )
 
-        if conflict:
-            frappe.throw(_("Room is already booked during this time"))
+    if conflict:
+        frappe.throw(_("Room is already booked during this time"))
 
-        # Create the booking
-        booking = frappe.get_doc({
-            "doctype": "Room Booking",
-            "meeting_title": meeting_title,
-            "room": room,
-            "requested_by": requested_by or frappe.session.user,
-            "booking_date": booking_date,
-            "start_time": start_time,
-            "end_time": end_time,
-            "purpose": purpose
-        })
+    # Create the booking
+    booking = frappe.get_doc({
+        "doctype": "Room Booking",
+        "meeting_title": meeting_title,
+        "room": room,
+        "requested_by": requested_by or frappe.session.user,
+        "booking_date": booking_date,
+        "start_time": start_time,
+        "end_time": end_time,
+        "purpose": purpose
+    })
 
-        booking.insert(ignore_permissions=True)
+    booking.insert(ignore_permissions=True)
 
-        return {
-            "success": True,
-            "message": _("Booking created successfully"),
-            "booking_id": booking.name
-        }
-
-    except Exception:
-        frappe.log_error(frappe.get_traceback(), "Create Room Booking Error")
-        raise
-
+    return {
+        "success": True,
+        "message": _("Booking created successfully"),
+        "booking_id": booking.name
+    }
 
 @frappe.whitelist()
 def get_booking_details(booking_id: str):
