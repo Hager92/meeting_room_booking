@@ -195,8 +195,8 @@ def cancel_booking(booking_id: str, cancellation_reason: Optional[str] = None):
     ):
         frappe.throw(_("Not allowed to cancel this booking"))
 
-    if booking.status == "Completed":
-        frappe.throw(_("Completed bookings cannot be cancelled"))
+    if booking.status != "Approved":
+        frappe.throw(_("Only approved bookings can be cancelled"))
 
     if booking.status == "Cancelled":
         frappe.throw(_("Booking is already cancelled"))
